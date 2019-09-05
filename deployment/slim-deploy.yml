@@ -1,0 +1,6 @@
+- name: Deploy docker and nginx
+  hosts: hosting
+  user: "{{ deployer_user }}"
+  roles:
+    - nginx
+    - docker

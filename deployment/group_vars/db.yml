@@ -1,0 +1,4 @@
+db_user: "{{app_name}}"
+db_password:
+db_name: "{{ app_name }}"
+db_url: postgresql://{{deployer_user}}:{{db_password}}@localhost/{{app_name}}

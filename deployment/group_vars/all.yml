@@ -1,0 +1,26 @@
+app_name:
+
+deployer_user: deployer
+deployer_group: deployer
+
+code_repository_url: "https://{{ github_user }}:{{ github_token }}@github.com/...."
+ssh_dir: ~/.ssh/id_rsa.pub
+
+# virtualenv
+venv_dir: '/home/{{ deployer_user }}/.virtualenvs/{{ app_name }}'
+venv_python: '{{ venv_dir }}/bin/python'
+
+app_dir: "/home/{{deployer_user}}/{{app_name}}"
+static_dir: "/var/www/bwa/static"
+media_dir: "/var/www/bwa/media"
+log_dir: "/var/log/gunicorn"
+
+# Http server details
+server_ip:
+wsgi_server_port:
+nginx_server_name:
+
+django_wsgi_module: "{{app_name}}.wsgi"
+django_settings_module: "{{app_name}}.settings.production"
+#django_secret_key: 'changeme'
+database_url: '{{ db_url }}'

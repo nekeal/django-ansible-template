@@ -1,0 +1,13 @@
+
+
+- name: Write supervisor conf file
+  template: src=example-django-supervisor.conf dest=/etc/supervisor/conf.d/{{ app_name }}.conf
+  become: true
+  notify:
+  - reread supervisor
+#  - reload supervisor
+  tags:
+    - supervisor
+
+- include: git.yml
+  tags: deploy
