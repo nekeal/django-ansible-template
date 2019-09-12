@@ -1,16 +1,6 @@
 
-#- name: Install and configure db
-#  apt: name={{item}} state=latest
-#  become: yes
-#  with_items:
-#    - postgresql-server
-#    - postgresql-contrib
-#    - postgresql-devel
-#    - python-psycopg2
-#
-
 - name: Include db variables
-  include_vars: group_vars/db.yml
+  include_vars: group_vars/secret.yml
 
 - name: Start and enable postgres
   service: name=postgresql enabled=yes state=started
@@ -23,7 +13,7 @@
 
 - name: Configure a new postgresql user
   postgresql_user:
-    db={{ app_name }}
+    db={{ db_name }}
     name={{ db_user }}
     password={{ db_password }}
     priv=ALL

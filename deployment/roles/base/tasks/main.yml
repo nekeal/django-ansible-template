@@ -34,18 +34,6 @@
     state: directory
     owner: "{{ deployer_user }}"
 
-- name: Creates media directory
-  file:
-    path: "{{media_dir}}"
-    state: directory
-    owner: "{{deployer_user}}"
-
-- name: Creates static directory
-  file:
-    path: "{{static_dir}}"
-    state: directory
-    owner: "{{deployer_user}}"
-
 - name: Creates log directory
   file:
     path: "{{ log_dir }}"

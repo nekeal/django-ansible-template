@@ -1,0 +1,4 @@
+POSTGRES_USER={{ project_name }}
+POSTGRES_DB={{ project_name }}
+POSTGRES_PASSWORD={{ project_name }}
+COMPOSE_PROJECT_NAME={{ project_name }}

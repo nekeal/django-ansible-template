@@ -2,19 +2,43 @@ from .base import *
 
 DEBUG = False
 
-DATABASES = {
-    'local': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+ALLOWED_HOSTS = ['*']
+
+env_path = Path('.env')
+load_dotenv(dotenv_path=env_path)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console_info': {
+            'level': 'WARNING',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
+}
     },
-        # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'db_name',
-    #     'USER': 'db_user',
-    #     'PASSWORD': 'db_password',
-    #     'HOST': 'db_host',
-    # }
+    'formatters': {
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[{server_time}] {message}',
+            'style': '{'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console_info'],
+        }
+    }
+}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
+        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+    }
 
 }
-STATIC_ROOT = '/var/www/{{project_name}}/static/'
-MEDIA_ROOT = '/var/www/{{project_name}}/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'public')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

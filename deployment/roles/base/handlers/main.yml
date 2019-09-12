@@ -17,14 +17,14 @@
     command: collectstatic
     virtualenv: "{{ venv_dir }}"
     app_path: "{{ app_dir }}"
-    settings: "{{app_name}}.settings.production"
+    settings: "{{ django_settings_module }}"
 
 - name: migrate db
   django_manage:
     command: migrate
     virtualenv: "{{ venv_dir }}"
     app_path: "{{ app_dir }}"
-    settings: "bwa.settings.production"
+    settings: "{{ django_settings_module }}"
   environment:
     production: "1"
 

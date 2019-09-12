@@ -6,4 +6,7 @@ __pycache__/
 db.sqlite3
 media
 public
-deployment/group_vars/envs/github.yml
+/.env
+.venv
+pg_data/
+deployment/group_vars/github.yml

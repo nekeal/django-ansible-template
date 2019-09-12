@@ -1,17 +1,10 @@
-#- name: Add ssh agent line to sudoers
-#  lineinfile:
-#    dest: /etc/sudoers
-#    state: present
-#    regexp: SSH_AUTH_SOCK
-#    line: Defaults env_keep += "SSH_AUTH_SOCK"
-#  become: yes
 
-- name: Include github credentials
-  include_vars: group_vars/github.yml
+- include_vars: "group_vars/github.yml"
 
 - name: Pull app from git
   git: repo={{ code_repository_url }}
-       dest={{ app_dir }}
+       dest={{ repo_dir }}
+       version={{ branch_name }}
        force=yes
   notify:
     - reload supervisor
@@ -20,8 +13,12 @@
     - migrate db
   tags: git
 
-- name: Make manage.py executable
+- name: Create static directory
   file:
-    path: "{{ app_dir }}/manage.py"
-    mode: 0777
-  tags: git
+    path: "{{ static_dir }}"
+    state: directory
+
+- name: Create media directory
+  file:
+    path: "{{ media_dir }}"
+    state: directory
