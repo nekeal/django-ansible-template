@@ -5,6 +5,7 @@ deployer_group: deployer
 
 code_repository_url: "https://{{ github_user }}:{{ github_token }}@github.com/..."
 repo_name: "{{ app_name }}"
+branch_name: 'master'
 ssh_dir: ~/.ssh/id_rsa.pub
 
 # virtualenv

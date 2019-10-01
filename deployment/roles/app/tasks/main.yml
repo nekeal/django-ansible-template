@@ -1,5 +1,9 @@
 
+
 - include_vars: 'group_vars/secret.yml'
+
+- include: git.yml
+  tags: deploy
 
 - name: Write env file
   template: src=example-env.j2 dest={{ app_dir }}/.env
@@ -8,10 +12,6 @@
   template: src=example-django-supervisor.conf.j2 dest=/etc/supervisor/conf.d/{{ app_name }}.conf
   become: true
   notify:
-  - reread supervisor
-#  - reload supervisor
+    - reread supervisor
   tags:
     - supervisor
-
-- include: git.yml
-  tags: deploy
